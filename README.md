@@ -25,29 +25,6 @@ Direct link of the newest file: `https://github.com/mocny-gaz/mc-changes/release
 
 Files named `old_mcchanges-*.jar` use the old layout (bigger). They still work with PackSquash, but you do not need them.
 
-## Use it with PackSquash (fork)
-
-1. Use the fork with patch 0014 (compact language keys) or newer. Releases:
-   <https://github.com/mocny-gaz/PackSquash-uv12/releases>
-2. Put the jar somewhere, for example `C:\amc\mcchanges-java.jar`.
-3. Make `packsquash.toml` (use single quotes for Windows paths):
-
-       pack_directory = 'C:\packs\my_pack'
-       output_file_path = 'C:\packs\my_pack.zip'
-       mcchanges_path = 'C:\amc\mcchanges-java.jar'
-       mcchanges_version = '1.21.4'
-
-4. Run it:
-
-       packsquash.exe packsquash.toml
-
-PackSquash leaves out the files of your pack that are the same as the files of game version `1.21.4`: textures with the
-same pixels, JSON files with the same contents, sounds that are exact copies, and lines of language files with the same
-value. Everything else is squashed as usual. `mcchanges_version` must be the game version that the pack is for.
-
-Example: a pack that only changes 20 textures and one language line, built on top of a full copy of the vanilla assets,
-gets the size of those changes.
-
 ## Use it in another project
 
 A reader needs about 100 lines. `example_reader.py` (Python, standard library only) is a complete example:
@@ -112,3 +89,26 @@ Check it. If it is wrong, do not use the file.
 - Match only on the exact rules above. When in doubt, keep the file.
 - Never use a `.langkeys` file with a wrong digest.
 - The hashes jars do not hold Mojang's files. A `kind: "full"` jar does, so never share that kind.
+
+## Use it with PackSquash (fork)
+
+1. Use the fork:
+   <https://github.com/mocny-gaz/PackSquash-uv12/releases>
+2. Put the jar somewhere, for example `C:\amc\mcchanges-java.jar`.
+3. Make `packsquash.toml` (use single quotes for Windows paths):
+
+       pack_directory = 'C:\packs\my_pack'
+       output_file_path = 'C:\packs\my_pack.zip'
+       mcchanges_path = 'C:\amc\mcchanges-java.jar'
+       mcchanges_version = '1.21.4'
+
+4. Run it:
+
+       packsquash.exe packsquash.toml
+
+PackSquash leaves out the files of your pack that are the same as the files of game version `1.21.4`: textures with the
+same pixels, JSON files with the same contents, sounds that are exact copies, and lines of language files with the same
+value. Everything else is squashed as usual. `mcchanges_version` must be the game version that the pack is for.
+
+Example: a pack that only changes 20 textures and one language line, built on top of a full copy of the vanilla assets,
+gets the size of those changes.
